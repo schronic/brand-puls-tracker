@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Output Form</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <div>
+    <form action="dbupdate" method="POST">
+      <div class="form-group">
+        {{#overall}}
+        {{#scraper}}
+        {{#each sorted_articles}}
+        <div class="card text-center">
+          <div class="card-header">
+            {{source}}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p>Published: {{time}}</p>
+            {{#each content}}
+            <h8 class="card-text"> ({{@key}} - {{this}}) </h8>
+            {{/each}}
+            <br>
+            <h8 class="card-text"> (polarity - {{polarity}}) (subjectivity - {{subjectivity}})</h8>
+
+            <br>
+            <input type="checkbox" id="{{title}}{{@index}}" name="upvote" value="{{link}}">
+            <label for="{{link}}">upvote</label>
+
+            <br>
+            <a href="{{link}}" class="btn btn-primary" target="_blank">Go there</a>
+          </div>
+          <div class="card-footer text-muted"></div>
+        </div>
+        {{/each}}
+        {{/scraper}}
+
+        <h1>Social media</h1>
+
+        {{#social_media}}
+
+
+        {{#each twitter}}
+        <div class="card text-center">
+          <div class="card-header">
+            {{ source }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ name }} @{{ username }}</h5>
+            <p>Published: {{ created }}</p>
+            {{ text }}
+
+            <br>
+            <h8 class="card-text"> (polarity - {{polarity}}) (subjectivity - {{subjectivity}})</h8>
+
+            <br>
+            {{ retweet_count }}
+            {{ favorite_count }}
+            {{ location }}
+            {{ image_url }}
+
+            {{ entities }}
+            {{ Dominant_Topic }}
+            {{ Topic_Perc_Contrib }}
+            {{ Keywords }}
+            {{ Topic_Weights }}
+
+            {{url}}
+            <br>
+            <a href="{{ url }}" class="btn btn-primary" target="_blank">Go there</a>
+          </div>
+          <div class="card-footer text-muted"></div>
+        </div>
+        {{/each}}
+
+        {{#each instagram}}
+        <div class="card text-center">
+          <div class="card-header">
+            {{ source }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"> Get username /name </h5>
+            <p>Published: {{ created }}</p>
+            {{ text }}/ {{alt}}
+
+            <br>
+            <h8 class="card-text"> (polarity - {{polarity}}) (subjectivity - {{subjectivity}})</h8>
+
+            <br>
+            {{ image_url }}
+
+            {{ entities }}
+            {{ Dominant_Topic }}
+            {{ Topic_Perc_Contrib }}
+            {{ Keywords }}
+            {{ Topic_Weights }}
+            <br>
+            <a href="{{url}}" class="btn btn-primary" target="_blank">Go there</a>
+          </div>
+          <div class="card-footer text-muted"></div>
+        </div>
+        {{/each}}
+
+        {{#each reddit}}
+        <div class="card text-center">
+          <div class="card-header">
+            {{ source }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"> Get username /name </h5>
+            <p>Published: {{ created }}</p>
+            {{ text }}
+
+            <br>
+            <h8 class="card-text"> (polarity - {{polarity}}) (subjectivity - {{subjectivity}})</h8>
+            <br>
+            {{#each location}}
+              location {{ x }}
+            {{/each}}
+            <br>
+            image_url {{ image_url }}
+            <br>
+            title {{ title }}
+            <br>
+            entities {{ entities }}
+            <br>
+            Dominant_Topic {{ Dominant_Topic }}
+            <br>
+            Topic_Perc_Contrib {{ Topic_Perc_Contrib }}
+            <br>
+            Keywords {{ Keywords }}
+            <br>
+            {{#each Topic_Weights}}
+              ({{@key}} - {{this}}) 
+            {{/each}}
+            <br>
+            Intent {{ Intent }}<br>
+            {{#image_details}}
+              {{Label}}
+              {{Score}}
+              {{Topicality}}
+            {{/image_details}}
+            <br>
+            <a href="{{url}}" class="btn btn-primary" target="_blank">Go there</a>
+          </div>
+          <div class="card-footer text-muted"></div>
+        </div>
+        {{/each}}
+
+        {{/social_media}}
+
+        {{/overall}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+      </div>
+    </form>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
